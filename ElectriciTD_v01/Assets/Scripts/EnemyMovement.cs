@@ -17,13 +17,11 @@ public class EnemyMovement : MonoBehaviour
 
 
 	#region Unity Functions
-	// Start is called before the first frame update
 	void Start()
     {
 		target = Waypoints.points[0];
     }
 
-    // Update is called once per frame
     void Update()
     {
 		Vector3 dir = target.position - transform.position;
@@ -38,11 +36,12 @@ public class EnemyMovement : MonoBehaviour
 	#endregion
 
 	#region User Functions
-
+	//Lets the enemy select the next waypoint from the array
 	void GetNextWaypoint()
 	{
 		if (wavepointIndex >= Waypoints.points.Length - 1)
 		{
+			//enemy is destroyed when reaching end region
 			Destroy(gameObject);
 			return;
 		}
