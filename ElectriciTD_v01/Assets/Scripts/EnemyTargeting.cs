@@ -10,7 +10,7 @@ public class EnemyTargeting : MonoBehaviour
 	public Transform pivotPoint;
 	public Transform firePoint;
 
-	public Turrets currentTurret;
+	public TurretBlueprints currentTurret;
 	public string enemyTag = "Enemy";
 
 	private float fireCountdown = 0f;

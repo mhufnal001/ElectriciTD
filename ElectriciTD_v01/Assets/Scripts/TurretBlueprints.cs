@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
 
 [CreateAssetMenu(fileName = "New Turret", menuName = "Turrets")]
-public class Turrets : ScriptableObject
+public class TurretBlueprints : ScriptableObject
 {
 	#region Variables
 
-	[Header("Stats")]
+	[Header("Turret Model")]
+	public GameObject turretPrefab;
+
+	[Header("Turret Stats")]
 	public float range;
 	public float fireRate;
 	public float turnSpeed;
