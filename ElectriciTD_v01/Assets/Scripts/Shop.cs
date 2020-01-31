@@ -1,11 +1,14 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
 	#region Variables
 
-	BuildManager buildManager;
+	BuildManager bm;
 	public TurretBlueprints[] turretTypes;
+
+	public Text energyText;
 
     #endregion
 
@@ -13,11 +16,13 @@ public class Shop : MonoBehaviour
 
     void Start()
     {
-		buildManager = BuildManager.instance;
+		bm = BuildManager.instance;
     }
 
     void Update()
     {
+
+		energyText.text = "Energy: " + GameManager.Energy.ToString();
         
     }
 
@@ -29,7 +34,7 @@ public class Shop : MonoBehaviour
 	{
 		GameObject turretSelected = turretTypes[turretIndex].turretPrefab;
 
-		buildManager.SetTurretToBuild(turretSelected);
+		bm.SetTurretToBuild(turretSelected);
 	}
 
     #endregion	

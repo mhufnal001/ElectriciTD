@@ -15,7 +15,7 @@ public class TurretBlueprints : ScriptableObject
 
 	public int attackValue;
 	public int health;
-	public int value;
+	public int energyCost;
 	#endregion
 
 	#region Unity Methods

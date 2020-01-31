@@ -5,7 +5,8 @@ public class Node : MonoBehaviour
 {
 	#region Variables
 
-	public Color hoverColor;
+	public Color hasEnergyColor;
+	public Color noEnergyColor;
 	public Vector3 turretPosOffset;
 
 	[Header("Optional")]
@@ -44,7 +45,16 @@ public class Node : MonoBehaviour
 		{
 			return;
 		}
-		r.material.color = hoverColor;
+
+		if (bm.HasMoney)
+		{
+			r.material.color = hasEnergyColor;
+		}
+		else
+		{
+			r.material.color = noEnergyColor;
+		}
+
 	}
 
 	private void OnMouseExit()
@@ -66,7 +76,6 @@ public class Node : MonoBehaviour
 		}
 
 		bm.BuildTurretOn(this);
-
 	}
 
 	#endregion

@@ -20,7 +20,6 @@ public class EnemyTargeting : MonoBehaviour
     void Start()
     {
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
-
     }
 
     void Update()
