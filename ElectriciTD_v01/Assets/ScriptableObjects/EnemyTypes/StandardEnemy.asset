@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 543b599fbc3dc454780662ec09d92605, type: 3}
-  m_Name: Heavy
+  m_Script: {fileID: 11500000, guid: b7bc320463a07a549bb1b904eeaf1c09, type: 3}
+  m_Name: StandardEnemy
   m_EditorClassIdentifier: 
-  turretPrefab: {fileID: 6958963308509738706, guid: 5376fc581713ecd4a80947037f2f0615,
+  enemyPrefab: {fileID: 5138401158858659317, guid: 02719106dc7adcb4e90f026c999526bb,
     type: 3}
-  range: 10
-  fireRate: 0.5
-  turnSpeed: 10
-  attackValue: 200
-  health: 650
-  energyCost: 250
+  attackValue: 10
+  health: 100
+  energyValue: 15

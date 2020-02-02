@@ -12,13 +12,19 @@ public class EnemyMovement : MonoBehaviour
 	public float speed;
 	private int wavepointIndex = 0;
 
+	private EnemyTypes currentEnemy;
 	private Transform target;
+	public PowerUI powerUI;
+
 	#endregion
 
 
 	#region Unity Functions
 	void Start()
     {
+		currentEnemy = gameObject.GetComponent<Enemy>().currentType;
+		powerUI = FindObjectOfType<PowerUI>();
+
 		target = Waypoints.points[0];
     }
 
@@ -42,13 +48,32 @@ public class EnemyMovement : MonoBehaviour
 		if (wavepointIndex >= Waypoints.points.Length - 1)
 		{
 			//enemy is destroyed when reaching end region
-			Destroy(gameObject);
+			PathEnded();
+
 			return;
 		}
 
 		wavepointIndex++;
 		target = Waypoints.points[wavepointIndex];
 
+	}
+
+	void PathEnded()
+	{
+
+		if (GameManager.Power < GameManager.maxPower)
+		{
+			powerUI.gainedPowerAnim.SetTrigger("GainedPower");
+			GameManager.Power += currentEnemy.attackValue;
+			powerUI.GainedPowerAnimation(currentEnemy.attackValue);
+		}
+		if (GameManager.Power == GameManager.maxPower)
+		{
+			powerUI.gainedPowerAnim.ResetTrigger("GainedPower");
+
+		}
+
+		Destroy(gameObject);
 	}
 
 	#endregion

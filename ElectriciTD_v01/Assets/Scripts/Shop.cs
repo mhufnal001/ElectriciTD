@@ -22,7 +22,7 @@ public class Shop : MonoBehaviour
     void Update()
     {
 
-		energyText.text = "Energy: " + GameManager.Energy.ToString();
+		energyText.text = GameManager.Energy.ToString();
         
     }
 

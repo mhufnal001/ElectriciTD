@@ -1,31 +1,25 @@
 ﻿using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
 	#region Variables
 
-	public static int Energy;
-	public int startEnergy = 450;
-	private int maxEnergy = 9999;
+	public EnemyTypes currentType;
 
     #endregion
 
     #region Unity Methods
     void Start()
     {
-		Energy = startEnergy;
+        
     }
 
     void Update()
     {
         
     }
-
     #endregion
 
     #region User Methods
-
-
-
     #endregion	
 }

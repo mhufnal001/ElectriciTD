@@ -5,12 +5,12 @@ public class EnemyTargeting : MonoBehaviour
 	#region Variables
 
 	public GameObject bulletPrefab;
+	public TurretBlueprints currentTurret;
 
 	public Transform target;
 	public Transform pivotPoint;
 	public Transform firePoint;
 
-	public TurretBlueprints currentTurret;
 	public string enemyTag = "Enemy";
 
 	private float fireCountdown = 0f;
@@ -19,6 +19,8 @@ public class EnemyTargeting : MonoBehaviour
     #region Unity Methods
     void Start()
     {
+		currentTurret = gameObject.GetComponent<Turret>().currentBlueprint;
+
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
 

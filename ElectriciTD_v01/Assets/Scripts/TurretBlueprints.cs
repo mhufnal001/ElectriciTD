@@ -17,21 +17,4 @@ public class TurretBlueprints : ScriptableObject
 	public int health;
 	public int energyCost;
 	#endregion
-
-	#region Unity Methods
-
-	void Start()
-	{
-
-	}
-
-	void Update()
-	{
-
-	}
-	#endregion
-
-	#region User Methods
-
-	#endregion
 }

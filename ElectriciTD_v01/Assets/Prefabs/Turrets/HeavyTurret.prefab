@@ -121,6 +121,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6253368593600595137}
   - component: {fileID: 3831331854758631458}
+  - component: {fileID: -7351256877880059102}
   m_Layer: 0
   m_Name: HeavyTurret
   m_TagString: Untagged
@@ -158,11 +159,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4277261755235345145, guid: a57003b37fe75d94f87480c10cfe865e,
     type: 3}
+  currentTurret: {fileID: 11400000, guid: 02fbdb6ed26db7049b08960abbfa1dd8, type: 2}
   target: {fileID: 0}
   pivotPoint: {fileID: 5296875246815719588}
   firePoint: {fileID: 2338674294848894981}
-  currentTurret: {fileID: 11400000, guid: 02fbdb6ed26db7049b08960abbfa1dd8, type: 2}
   enemyTag: Enemy
+--- !u!114 &-7351256877880059102
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6958963308509738706}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30711b9e1e0c1014c967cfea71a5e245, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentBlueprint: {fileID: 11400000, guid: 02fbdb6ed26db7049b08960abbfa1dd8, type: 2}
 --- !u!1 &7847912370596770305
 GameObject:
   m_ObjectHideFlags: 0
