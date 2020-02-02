@@ -6,6 +6,7 @@ public class GameManager : MonoBehaviour
 
 	public static int Energy;
 	public int startEnergy = 450;
+	private int maxEnergy = 9999;
 
     #endregion
 

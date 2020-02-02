@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class BuildManager : MonoBehaviour
 {
@@ -25,6 +26,10 @@ public class BuildManager : MonoBehaviour
 	private GameObject turretToBuild;
 	private TurretBlueprints selectedTurret;
 
+	public GameObject buildEffect;
+	public Text spentEnergy;
+	public Animation spentEnergyAnim;
+
 	public bool CanBuild { get { return turretToBuild != null; } }
 	public bool HasMoney { get { return GameManager.Energy >= selectedTurret.energyCost; } }
 
@@ -34,6 +39,9 @@ public class BuildManager : MonoBehaviour
     void Start()
     {
 		selectedTurret = null;
+		spentEnergyAnim = spentEnergy.GetComponent<Animation>();
+
+		spentEnergy.enabled = false;
     }
 
     void Update()
@@ -66,7 +74,20 @@ public class BuildManager : MonoBehaviour
 		GameObject turret = Instantiate(turretToBuild, node.GetBuildPosition(), Quaternion.identity);
 		node.turret = turret;
 
+		GameObject turretBE = Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
+		Destroy(turretBE, 5f);
+
 		Debug.Log("Turret Built! Energy Left:" + GameManager.Energy);
+
+	}
+
+	public void SpentEnergyAnimation()
+	{
+		spentEnergy.enabled = true;
+
+		spentEnergy.text = "-" + selectedTurret.energyCost;
+
+		spentEnergyAnim.Play();
 
 	}
 
