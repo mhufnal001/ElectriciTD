@@ -29,8 +29,8 @@ public class PowerUI : MonoBehaviour
 
 	public void GainedPowerAnimation(int powerGained)
 	{
-		gainedPowerText.enabled = true;
 		gainedPowerText.text = "+" + powerGained;
+		gainedPowerText.enabled = true;
 
 	}
 

@@ -21,5 +21,22 @@ public class Enemy : MonoBehaviour
     #endregion
 
     #region User Methods
+
+	public void TakeDamage(int amount)
+	{
+		currentType.health -= amount;
+
+		if (currentType.health <= 0)
+		{
+			Die();
+		}
+	}
+
+	void Die()
+	{
+		Destroy(gameObject);
+
+	}
+
     #endregion	
 }

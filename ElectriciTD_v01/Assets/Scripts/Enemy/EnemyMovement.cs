@@ -61,13 +61,13 @@ public class EnemyMovement : MonoBehaviour
 	void PathEnded()
 	{
 
-		if (GameManager.Power < GameManager.maxPower)
+		if (GameManager.Power < GameManager.instance.maxPower)
 		{
 			powerUI.gainedPowerAnim.SetTrigger("GainedPower");
 			GameManager.Power += currentEnemy.attackValue;
 			powerUI.GainedPowerAnimation(currentEnemy.attackValue);
 		}
-		if (GameManager.Power == GameManager.maxPower)
+		if (GameManager.Power == GameManager.instance.maxPower)
 		{
 			powerUI.gainedPowerAnim.ResetTrigger("GainedPower");
 

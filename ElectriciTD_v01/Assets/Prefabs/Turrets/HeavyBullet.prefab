@@ -106,6 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe6d7fef5b220e4e90d862503cbfc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactEffect: {fileID: 9019584249540823598, guid: 314cff27a15828844a8aa79b4072c75b,
-    type: 3}
-  speed: 70
+  currentBullet: {fileID: 11400000, guid: 5b4e6413af940514c88550dacf241871, type: 2}

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5317954965228701244}
   - component: {fileID: 7571070437626402913}
   m_Layer: 0
-  m_Name: Bullet
+  m_Name: StandardBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,6 +106,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dbe6d7fef5b220e4e90d862503cbfc48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  impactEffect: {fileID: 9019584249540823598, guid: 314cff27a15828844a8aa79b4072c75b,
-    type: 3}
-  speed: 70
+  currentBullet: {fileID: 11400000, guid: 66b140b89c3f32c45885f2af4d04e6d1, type: 2}

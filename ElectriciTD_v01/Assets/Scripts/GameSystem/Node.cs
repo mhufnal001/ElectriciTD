@@ -76,6 +76,7 @@ public class Node : MonoBehaviour
 		}
 
 		bm.BuildTurretOn(this);
+		bm.spentEnergyAnim.SetTrigger("SpentEnergy");
 		bm.SpentEnergyAnimation();
 	}
 

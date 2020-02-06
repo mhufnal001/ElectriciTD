@@ -5,9 +5,7 @@ public class Bullet : MonoBehaviour
 	#region Variables
 
 	private Transform target;
-	public GameObject impactEffect;
-
-	public float speed = 70f;
+	public BulletBlueprints currentBullet;
 
 	#endregion
 
@@ -15,9 +13,7 @@ public class Bullet : MonoBehaviour
 	void Start()
     {
 
-
-        
-    }
+	}
 
     void Update()
     {
@@ -30,7 +26,7 @@ public class Bullet : MonoBehaviour
 
 		//track bullet distance and make it face target while travelling
 		Vector3 dir = target.position - transform.position;
-		float distanceThisFrame = speed * Time.deltaTime;
+		float distanceThisFrame = currentBullet.bulletSpeed * Time.deltaTime;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
 		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 25f).eulerAngles;
 		transform.rotation = Quaternion.Euler(90f, rotation.y, 90f);
@@ -55,12 +51,21 @@ public class Bullet : MonoBehaviour
 
 	void HitTarget()
 	{
-		GameObject effectInstance = Instantiate(impactEffect, transform.position, transform.rotation);
+		GameObject effectInstance = Instantiate(currentBullet.impactEffect, transform.position, transform.rotation);
 
+		Damage(target);
 
 		Destroy(effectInstance, 1f);
 		Destroy(gameObject);
 		return;
+	}
+
+	void Damage(Transform enemy)
+	{
+		Enemy e = enemy.GetComponent<Enemy>();
+
+		e.TakeDamage(currentBullet.bulletDamage);
+
 	}
 
     #endregion	
