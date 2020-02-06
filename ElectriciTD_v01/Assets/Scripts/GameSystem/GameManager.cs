@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -24,17 +25,19 @@ public class GameManager : MonoBehaviour
 
 	public static int Energy;
 	public static int Power;
+	public static int Rounds;
 	[HideInInspector]
 	public int maxEnergy = 9999;
 	public int startEnergy = 450;
 	public int maxPower = 100;
 	public int startPower = 0;
-	public int Rounds;
 
 
 	public static bool GameOver;
 
 	public GameObject gameOverUI;
+	public Text gainedEnergyText, energyText;
+	public Animator energyAnim;
     #endregion
 
     #region Unity Methods
@@ -42,6 +45,8 @@ public class GameManager : MonoBehaviour
     {
 		Energy = startEnergy;
 		Power = startPower;
+		gainedEnergyText.enabled = false;
+		energyAnim = energyText.GetComponent<Animator>();
 
 		Rounds = 0;
 		GameOver = false;
@@ -71,5 +76,14 @@ public class GameManager : MonoBehaviour
 		gameOverUI.SetActive(true);
 	}
 
-    #endregion	
+	public void GainedEnergy(int energyGained)
+	{
+		energyAnim.SetTrigger("GainedEnergy");
+
+		Energy += energyGained;
+		gainedEnergyText.text = "+" + energyGained;
+		gainedEnergyText.enabled = true;
+	}
+
+	#endregion
 }

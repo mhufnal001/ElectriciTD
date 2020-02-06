@@ -36,7 +36,7 @@ public class WaveSpawner : MonoBehaviour
 	IEnumerator SpawnWave()
 	{
 		waveIndex++;
-		GameManager.instance.Rounds++;
+		GameManager.Rounds++;
 
 		for (int i = 0; i < waveIndex; i++)
 		{

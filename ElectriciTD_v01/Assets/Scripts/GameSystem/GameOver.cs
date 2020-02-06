@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -22,10 +23,21 @@ public class GameOver : MonoBehaviour
 
 	private void OnEnable()
 	{
-		roundsText.text = GameManager.instance.Rounds.ToString();
+		roundsText.text = GameManager.Rounds.ToString();
 	}
 	#endregion
 
 	#region User Methods
+
+	public void Retry()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void Menu()
+	{
+		Debug.Log("Go To Menu.");
+	}
+
 	#endregion
 }

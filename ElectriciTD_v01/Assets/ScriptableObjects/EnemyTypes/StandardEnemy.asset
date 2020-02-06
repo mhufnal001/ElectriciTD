@@ -15,5 +15,5 @@ MonoBehaviour:
   enemyPrefab: {fileID: 5138401158858659317, guid: 02719106dc7adcb4e90f026c999526bb,
     type: 3}
   attackValue: 10
-  health: 100
-  energyValue: 15
+  health: 50
+  energyValue: 25

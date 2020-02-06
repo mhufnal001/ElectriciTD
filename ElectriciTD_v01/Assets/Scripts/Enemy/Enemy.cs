@@ -5,13 +5,15 @@ public class Enemy : MonoBehaviour
 	#region Variables
 
 	public EnemyTypes currentType;
+	public GameObject enemyDeathEffect;
 
+	public int hp;
     #endregion
 
     #region Unity Methods
     void Start()
     {
-        
+		hp = currentType.health;
     }
 
     void Update()
@@ -24,9 +26,9 @@ public class Enemy : MonoBehaviour
 
 	public void TakeDamage(int amount)
 	{
-		currentType.health -= amount;
+		hp -= amount;
 
-		if (currentType.health <= 0)
+		if (hp <= 0)
 		{
 			Die();
 		}
@@ -34,8 +36,12 @@ public class Enemy : MonoBehaviour
 
 	void Die()
 	{
-		Destroy(gameObject);
+		GameManager.instance.GainedEnergy(currentType.energyValue);
 
+
+		GameObject effect = Instantiate(enemyDeathEffect, transform.position, Quaternion.identity);
+		Destroy(gameObject);
+		Destroy(effect, 5f);
 	}
 
     #endregion	

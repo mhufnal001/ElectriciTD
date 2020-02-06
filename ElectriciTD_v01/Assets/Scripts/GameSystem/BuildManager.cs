@@ -29,7 +29,7 @@ public class BuildManager : MonoBehaviour
 	public GameObject buildEffect;
 	public Text spentEnergyText;
 	public Text energyText;
-	public Animator spentEnergyAnim;
+	public Animator energyAnim;
 
 	public bool CanBuild { get { return turretToBuild != null; } }
 	public bool HasMoney { get { return GameManager.Energy >= selectedTurret.energyCost; } }
@@ -40,7 +40,7 @@ public class BuildManager : MonoBehaviour
     void Start()
     {
 		selectedTurret = null;
-		spentEnergyAnim = energyText.GetComponent<Animator>();
+		energyAnim = energyText.GetComponent<Animator>();
 		spentEnergyText.enabled = false;
     }
 
@@ -81,7 +81,6 @@ public class BuildManager : MonoBehaviour
 
 	public void SpentEnergyAnimation()
 	{
-
 		spentEnergyText.text = "-" + selectedTurret.energyCost;
 		spentEnergyText.enabled = true;
 	}

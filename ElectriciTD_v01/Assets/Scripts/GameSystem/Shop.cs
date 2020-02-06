@@ -9,6 +9,7 @@ public class Shop : MonoBehaviour
 	public TurretBlueprints[] turretTypes;
 
 	public Text energyText;
+	public Text standardTurret, heavyTurret;
 
     #endregion
 
@@ -21,9 +22,9 @@ public class Shop : MonoBehaviour
 
     void Update()
     {
-
 		energyText.text = GameManager.Energy.ToString();
-        
+		standardTurret.text = turretTypes[0].energyCost.ToString();
+		heavyTurret.text = turretTypes[1].energyCost.ToString();
     }
 
     #endregion

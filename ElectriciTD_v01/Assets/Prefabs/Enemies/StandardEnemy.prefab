@@ -122,3 +122,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentType: {fileID: 11400000, guid: 42df5ea13a79c0e47a279385620d3e53, type: 2}
+  enemyDeathEffect: {fileID: 3676189867599560878, guid: 327e9cddadc9f9649a66e199145cb5ed,
+    type: 3}
+  hp: 0
