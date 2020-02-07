@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-
+[System.Serializable]
 public class GameManager : MonoBehaviour
 {
 	#region Singleton
@@ -28,13 +28,14 @@ public class GameManager : MonoBehaviour
 	public static int Rounds;
 	[HideInInspector]
 	public int maxEnergy = 9999;
+	[Header("Health and Currency")]
 	public int startEnergy = 450;
 	public int maxPower = 100;
 	public int startPower = 0;
 
-
 	public static bool GameOver;
-
+	[Space]
+	[Header("Assigned Variables")]
 	public GameObject gameOverUI;
 	public Text gainedEnergyText, energyText;
 	public Animator energyAnim;

@@ -14,7 +14,7 @@ public class EnemyMovement : MonoBehaviour
 
 	private EnemyTypes currentEnemy;
 	private Transform target;
-	public PowerUI powerUI;
+	public CollectionsUI collectionsUI;
 
 	#endregion
 
@@ -23,7 +23,7 @@ public class EnemyMovement : MonoBehaviour
 	void Start()
     {
 		currentEnemy = gameObject.GetComponent<Enemy>().currentType;
-		powerUI = FindObjectOfType<PowerUI>();
+		collectionsUI = FindObjectOfType<CollectionsUI>();
 
 		target = Waypoints.points[0];
     }
@@ -63,13 +63,13 @@ public class EnemyMovement : MonoBehaviour
 
 		if (GameManager.Power < GameManager.instance.maxPower)
 		{
-			powerUI.gainedPowerAnim.SetTrigger("GainedPower");
+			collectionsUI.gainedPowerAnim.SetTrigger("GainedPower");
 			GameManager.Power += currentEnemy.attackValue;
-			powerUI.GainedPowerAnimation(currentEnemy.attackValue);
+			collectionsUI.GainedPowerAnimation(currentEnemy.attackValue);
 		}
 		if (GameManager.Power == GameManager.instance.maxPower)
 		{
-			powerUI.gainedPowerAnim.ResetTrigger("GainedPower");
+			collectionsUI.gainedPowerAnim.ResetTrigger("GainedPower");
 
 		}
 

@@ -14,9 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turretPrefab: {fileID: 3483395330248470528, guid: 233bbfe0c1dd5b74abbc99972ae9e7c3,
     type: 3}
+  turretIcon: {fileID: 21300000, guid: f3078e016d13bbf498a659ec0995a7a4, type: 3}
+  turretName: StandardTurret
   range: 8
   fireRate: 2
   turnSpeed: 10
   attackValue: 30
   health: 400
   energyCost: 450
+  sellPrice: 150
+  upgradeCost: 2c0100005802000084030000b0040000204e0000

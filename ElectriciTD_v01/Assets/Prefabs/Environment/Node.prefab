@@ -109,3 +109,4 @@ MonoBehaviour:
   noEnergyColor: {r: 1, g: 0.3, b: 0.3, a: 1}
   turretPosOffset: {x: 0, y: 2, z: 0}
   turret: {fileID: 0}
+  collections: {fileID: 0}

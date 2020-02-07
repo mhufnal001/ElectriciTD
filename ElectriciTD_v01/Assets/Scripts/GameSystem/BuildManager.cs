@@ -22,26 +22,29 @@ public class BuildManager : MonoBehaviour
 
 
 	#region Variables
-
+	[HideInInspector]
 	private GameObject turretToBuild;
-	private TurretBlueprints selectedTurret;
+	[HideInInspector]
+	public TurretBlueprints selectedTurret;
+	private Node selectedNode;
 
 	public GameObject buildEffect;
-	public Text spentEnergyText;
-	public Text energyText;
-	public Animator energyAnim;
+	public GameObject upgradeUI;
+	public GameObject shopUI;
+	public UpgradeUI upgrade;
 
 	public bool CanBuild { get { return turretToBuild != null; } }
 	public bool HasMoney { get { return GameManager.Energy >= selectedTurret.energyCost; } }
+	public bool cUpgrades;
 
     #endregion
 
     #region Unity Methods
+
     void Start()
     {
 		selectedTurret = null;
-		energyAnim = energyText.GetComponent<Animator>();
-		spentEnergyText.enabled = false;
+		cUpgrades = false;
     }
 
     void Update()
@@ -55,35 +58,24 @@ public class BuildManager : MonoBehaviour
 	public void SetTurretToBuild(GameObject _turret)
 	{
 		turretToBuild = _turret;
-
 		selectedTurret = turretToBuild.GetComponent<EnemyTargeting>().currentTurret;
+
+		selectedNode = null;
 	}
 
-	public void BuildTurretOn(Node node)
+	public void SelectNode(Node node)
 	{
+		selectedNode = node;
+		turretToBuild = null;
+;	}
 
-		if (GameManager.Energy < selectedTurret.energyCost)
-		{
-			Debug.Log("Not Enough Money!");
-			return;
-		}
-
-		GameManager.Energy -= selectedTurret.energyCost;
-
-		//Build Turret
-		GameObject turret = Instantiate(turretToBuild, node.GetBuildPosition(), Quaternion.identity);
-		node.turret = turret;
-
-		GameObject turretBE = Instantiate(buildEffect, node.GetBuildPosition(), Quaternion.identity);
-		Destroy(turretBE, 5f);
-
-	}
-
-	public void SpentEnergyAnimation()
+	public TurretBlueprints GetTurretToBuild()
 	{
-		spentEnergyText.text = "-" + selectedTurret.energyCost;
-		spentEnergyText.enabled = true;
+		return selectedTurret;
 	}
-
+	public Node GetSelectedNode()
+	{
+		return selectedNode;
+	}
 	#endregion
 }
