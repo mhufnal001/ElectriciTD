@@ -32,13 +32,12 @@ public class GameManager : MonoBehaviour
 	public int startEnergy = 450;
 	public int maxPower = 100;
 	public int startPower = 0;
+	public CollectionsUI collections;
 
 	public static bool GameOver;
 	[Space]
 	[Header("Assigned Variables")]
 	public GameObject gameOverUI;
-	public Text gainedEnergyText, energyText;
-	public Animator energyAnim;
     #endregion
 
     #region Unity Methods
@@ -46,8 +45,7 @@ public class GameManager : MonoBehaviour
     {
 		Energy = startEnergy;
 		Power = startPower;
-		gainedEnergyText.enabled = false;
-		energyAnim = energyText.GetComponent<Animator>();
+		
 
 		Rounds = 0;
 		GameOver = false;
@@ -76,15 +74,5 @@ public class GameManager : MonoBehaviour
 
 		gameOverUI.SetActive(true);
 	}
-
-	public void GainedEnergy(int energyGained)
-	{
-		energyAnim.SetTrigger("GainedEnergy");
-
-		Energy += energyGained;
-		gainedEnergyText.text = "+" + energyGained;
-		gainedEnergyText.enabled = true;
-	}
-
 	#endregion
 }

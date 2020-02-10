@@ -4,11 +4,13 @@ using System.Collections;
 public class WaveSpawner : MonoBehaviour
 {
 	#region Variables
-	public Transform enemyPrefab;
+
+	public static int EnemiesAlive = 0;
+
 	public Transform spawnPoint;
+	public Wave[] waves;
 
 	public float timeBetweenWaves = 5f;
-	public float timeBetweenEnemies = .4f;
 	private float countdown = 2f;
 
 	private int waveIndex = 0;
@@ -22,10 +24,16 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
+		if (EnemiesAlive > 0)
+		{
+			return;
+		}
+
 		if (countdown <= 0f)
 		{
 			StartCoroutine(SpawnWave());
 			countdown = timeBetweenWaves;
+			return;
 		}
 
 		countdown -= Time.deltaTime;
@@ -35,21 +43,28 @@ public class WaveSpawner : MonoBehaviour
 	#region User Methods
 	IEnumerator SpawnWave()
 	{
-		waveIndex++;
 		GameManager.Rounds++;
+		Wave wave = waves[waveIndex];
 
-		for (int i = 0; i < waveIndex; i++)
+		for (int i = 0; i < wave.count; i++)
 		{
-			SpawnEnemy();
-			yield return new WaitForSeconds(timeBetweenEnemies);
+			SpawnEnemy(wave.enemy);
+			yield return new WaitForSeconds(1f / wave.rate);
 		}
 
+		waveIndex++;
+
+		if (waveIndex == waves.Length)
+		{
+			Debug.Log("You Win Bitch!");
+			this.enabled = false;
+		}
 	}
 
-	void SpawnEnemy()
+	void SpawnEnemy(GameObject enemy)
 	{
-		Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
-		
+		Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+		EnemiesAlive++;
 	}
 	#endregion
 }

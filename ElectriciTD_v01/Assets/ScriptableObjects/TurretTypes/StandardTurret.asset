@@ -19,8 +19,8 @@ MonoBehaviour:
   range: 8
   fireRate: 2
   turnSpeed: 10
-  attackValue: 30
-  health: 400
+  attackValue: 50
+  health: 100
   energyCost: 450
-  sellPrice: 150
-  upgradeCost: 2c0100005802000084030000b0040000204e0000
+  sellPrice: 225
+  upgradeCost: 2c010000ee02000040060000a60e00004c1d0000

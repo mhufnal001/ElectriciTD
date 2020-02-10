@@ -12,8 +12,7 @@ public class UpgradeUI : MonoBehaviour
 	public Button upgradeButton;
 	public Button shopIcButton;
 	public CollectionsUI collections;
-
-	public int upgradeLevel;
+	public Node target;
 
 	[Space]
 	[Header("UpgradeUI")]
@@ -21,7 +20,7 @@ public class UpgradeUI : MonoBehaviour
 	public Text turretName, upgradeCost, sellValue;
 
 
-	 bool isUpgradeActive, isShopActive;
+	bool isUpgradeActive, isShopActive;
 
     #endregion
 
@@ -49,17 +48,25 @@ public class UpgradeUI : MonoBehaviour
 		}
 		if (turretToUpgrade != null)
 		{
-			SetTurretToUpgrade();
 			turretIcon.sprite = turretToUpgrade.GetComponent<Turret>().currentBlueprint.turretIcon;
 			turretName.text = turretToUpgrade.GetComponent<Turret>().currentBlueprint.turretName;
-			upgradeCost.text = turretToUpgrade.GetComponent<Turret>().currentBlueprint.upgradeCost[upgradeLevel - 1].ToString();
+			upgradeCost.text = turretToUpgrade.GetComponent<Turret>().currentBlueprint.upgradeCost[target.upgradeLevel - 1].ToString();
 			sellValue.text = turretToUpgrade.GetComponent<Turret>().currentBlueprint.sellPrice.ToString();
+		}
+		else
+		{
+			return;
 		}
 
 	}
 	#endregion
 
 	#region User Methods
+
+	public void SetNode(Node _target)
+	{
+		target = _target;
+	}
 
 	public void SetTurretToUpgrade()
 	{
@@ -69,6 +76,11 @@ public class UpgradeUI : MonoBehaviour
 
 	public void UpgradeActive()
 	{
+		if (BuildManager.instance.GetSelectedNode() == null)
+		{
+			return;
+		}
+		
 		SetTurretToUpgrade();
 		upgradeUI.SetTrigger("Active");
 		isUpgradeActive = true;
@@ -85,6 +97,7 @@ public class UpgradeUI : MonoBehaviour
 	{
 		shopUI.SetTrigger("Active");
 		isShopActive = true;
+		BuildManager.instance.DeselectNode();
 
 		if (isUpgradeActive)
 		{
@@ -95,27 +108,15 @@ public class UpgradeUI : MonoBehaviour
 	}
 	public void UpgradeTurret()
 	{
-		int _upgrade = turretToUpgrade.GetComponent<Turret>().currentBlueprint.upgradeCost[upgradeLevel - 1];
+		target.UpgradeTurret();
+		target.upgradeLevel++;
+	}
 
-		if (upgradeLevel >= turretToUpgrade.GetComponent<Turret>().currentBlueprint.upgradeCost.Length)
-		{
-			upgradeButton.enabled = false;
-			return;
-		}
-		else
-		{
-			if (GameManager.Energy > _upgrade)
-			{
-				GameManager.Energy -= _upgrade;
-				GameManager.instance.energyAnim.SetTrigger("SpentEnergy");
-				collections.SpentEnergyAnimation(_upgrade);
-				upgradeLevel++;
-			}
-			else
-			{
-				return;
-			}
-		}
+	public void Sell()
+	{
+		Node node = BuildManager.instance.GetSelectedNode();
+		ShopActive();
+		node.SellTurret();
 	}
 
     #endregion	

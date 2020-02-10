@@ -36,10 +36,10 @@ public class Enemy : MonoBehaviour
 
 	void Die()
 	{
-		GameManager.instance.GainedEnergy(currentType.energyValue);
-
-
+		GameManager.instance.collections.GainedEnergy(currentType.energyValue);
 		GameObject effect = Instantiate(enemyDeathEffect, transform.position, Quaternion.identity);
+
+		WaveSpawner.EnemiesAlive--;
 		Destroy(gameObject);
 		Destroy(effect, 5f);
 	}

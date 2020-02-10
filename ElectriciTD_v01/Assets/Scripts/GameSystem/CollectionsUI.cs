@@ -5,28 +5,25 @@ public class CollectionsUI : MonoBehaviour
 {
 	#region Variables
 
-	public Text powerText;
-	public Text gainedPowerText;
-	public Text energyText;
-	public Text spentEnergyText;
+	public Text powerText, gainedEnergyText, gainedPowerText, energyText, spentEnergyText;
 
-	public Animator energyAnim;
-	public Animator gainedPowerAnim;
+	public Animator energyAnim, powerAnim;
 
-	BuildManager bm;
+	GameManager gm; 
 
     #endregion
 
     #region Unity Methods
     void Start()
     {
-		bm = BuildManager.instance;
+		gm = GameManager.instance;
 
-		gainedPowerAnim = powerText.GetComponent<Animator>();
-		gainedPowerText.enabled = false;
-
+		powerAnim = powerText.GetComponent<Animator>();
 		energyAnim = energyText.GetComponent<Animator>();
+
+		gainedPowerText.enabled = false;
 		spentEnergyText.enabled = false;
+		gainedEnergyText.enabled = false;
 	}
 
     void Update()
@@ -37,17 +34,27 @@ public class CollectionsUI : MonoBehaviour
 
 	#region User Methods
 
-	public void GainedPowerAnimation(int powerGained)
+	public void GainedPower(int powerGained)
 	{
 		gainedPowerText.text = "+" + powerGained;
 		gainedPowerText.enabled = true;
 
 	}
 
-	public void SpentEnergyAnimation(int eSpent)
+	public void SpentEnergy(int eSpent)
 	{
 		spentEnergyText.text = "-" + eSpent;
 		spentEnergyText.enabled = true;
+	}
+
+	public void GainedEnergy(int energyGained)
+	{
+		energyAnim.SetTrigger("GainedEnergy");
+		gainedEnergyText.enabled = true;
+
+		GameManager.Energy += energyGained;
+
+		energyText.text = "+" + energyGained;
 	}
 
 	#endregion

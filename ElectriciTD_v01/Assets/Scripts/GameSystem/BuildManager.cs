@@ -25,7 +25,7 @@ public class BuildManager : MonoBehaviour
 	[HideInInspector]
 	private GameObject turretToBuild;
 	[HideInInspector]
-	public TurretBlueprints selectedTurret;
+	public Turret selectedTurret;
 	private Node selectedNode;
 
 	public GameObject buildEffect;
@@ -35,7 +35,7 @@ public class BuildManager : MonoBehaviour
 
 	public bool CanBuild { get { return turretToBuild != null; } }
 	public bool HasMoney { get { return GameManager.Energy >= selectedTurret.energyCost; } }
-	public bool cUpgrades;
+	public bool canUpgrade;
 
     #endregion
 
@@ -44,7 +44,7 @@ public class BuildManager : MonoBehaviour
     void Start()
     {
 		selectedTurret = null;
-		cUpgrades = false;
+		canUpgrade = false;
     }
 
     void Update()
@@ -58,18 +58,30 @@ public class BuildManager : MonoBehaviour
 	public void SetTurretToBuild(GameObject _turret)
 	{
 		turretToBuild = _turret;
-		selectedTurret = turretToBuild.GetComponent<EnemyTargeting>().currentTurret;
+		selectedTurret = turretToBuild.GetComponent<Turret>();
 
-		selectedNode = null;
+		DeselectNode();
 	}
 
 	public void SelectNode(Node node)
 	{
+		if (selectedNode == node)
+		{
+			DeselectNode();
+			return;
+		}
+
 		selectedNode = node;
 		turretToBuild = null;
+		upgrade.SetNode(node);
 ;	}
+	public void DeselectNode()
+	{
+		selectedNode = null;
+		canUpgrade = false;
+	}
 
-	public TurretBlueprints GetTurretToBuild()
+	public Turret GetTurretToBuild()
 	{
 		return selectedTurret;
 	}
