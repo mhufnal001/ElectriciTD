@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeUI : MonoBehaviour
 {
@@ -8,19 +9,22 @@ public class UpgradeUI : MonoBehaviour
 	private GameObject turretToUpgrade;
 	public Animator upgradeUI;
 	public Animator shopUI;
+	public Animator settingsUI;
 	public Button upgIcButton;
 	public Button upgradeButton;
 	public Button shopIcButton;
+	public Button settIcButton;
 	public CollectionsUI collections;
 	public Node target;
 
 	[Space]
 	[Header("UpgradeUI")]
 	public Image turretIcon;
-	public Text turretName, upgradeCost, sellValue;
+	public Text upgradeCost, sellValue;
+	public TextMeshProUGUI turretName;
 
 
-	bool isUpgradeActive, isShopActive;
+	bool isUpgradeActive, isShopActive, isSettingsActive;
 
     #endregion
 
@@ -91,6 +95,12 @@ public class UpgradeUI : MonoBehaviour
 
 			isShopActive = false;
 		}
+		else if (isSettingsActive)
+		{
+			settingsUI.SetTrigger("Inactive");
+			isSettingsActive = false;
+
+		}
 
 	}
 	public void ShopActive()
@@ -105,11 +115,36 @@ public class UpgradeUI : MonoBehaviour
 
 			isUpgradeActive = false;
 		}
+		else if (isSettingsActive)
+		{
+			settingsUI.SetTrigger("Inactive");
+			isSettingsActive = false;
+
+		}
+	}
+
+	public void OptionsActive()
+	{
+		settingsUI.SetTrigger("Active");
+		isSettingsActive = true;
+		BuildManager.instance.DeselectNode();
+
+		if (isUpgradeActive)
+		{
+			upgradeUI.SetTrigger("Inactive");
+
+			isUpgradeActive = false;
+		}
+		else if (isShopActive)
+		{
+			shopUI.SetTrigger("Inactive");
+			isShopActive = false;
+
+		}
 	}
 	public void UpgradeTurret()
 	{
 		target.UpgradeTurret();
-		target.upgradeLevel++;
 	}
 
 	public void Sell()

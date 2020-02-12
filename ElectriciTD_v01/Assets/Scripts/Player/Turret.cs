@@ -18,7 +18,7 @@ public class Turret : MonoBehaviour
 	#endregion
 
 	#region Unity Methods
-	void Start()
+	void Awake()
     {
 		range = currentBlueprint.range;
 		fireRate = currentBlueprint.fireRate;

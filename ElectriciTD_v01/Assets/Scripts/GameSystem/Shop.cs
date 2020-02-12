@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class Shop : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class Shop : MonoBehaviour
 	public TurretBlueprints[] turretTypes;
 
 	public Text energyText;
-	public Text standardTurret, heavyTurret;
+	public TextMeshProUGUI standardTurret, heavyTurret;
 
     #endregion
 

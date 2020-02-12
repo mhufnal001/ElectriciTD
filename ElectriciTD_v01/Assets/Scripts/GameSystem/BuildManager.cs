@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 public class BuildManager : MonoBehaviour
 {
 	#region Singleton
@@ -34,7 +35,7 @@ public class BuildManager : MonoBehaviour
 	public UpgradeUI upgrade;
 
 	public bool CanBuild { get { return turretToBuild != null; } }
-	public bool HasMoney { get { return GameManager.Energy >= selectedTurret.energyCost; } }
+	public bool HasMoney { get { return GameManager.Energy >= selectedTurret.currentBlueprint.energyCost; } }
 	public bool canUpgrade;
 
     #endregion

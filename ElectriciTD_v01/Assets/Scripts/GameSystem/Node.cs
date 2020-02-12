@@ -58,11 +58,11 @@ public class Node : MonoBehaviour
 			return;
 		}
 
-		if (bm.HasMoney && bm.canUpgrade == false)
+		if (bm.HasMoney)
 		{
 			r.material.color = hasEnergyColor;
 		}
-		else if (!bm.HasMoney || bm.canUpgrade == true)
+		else if (!bm.HasMoney)
 		{
 			r.material.color = noEnergyColor;
 		}
@@ -95,7 +95,6 @@ public class Node : MonoBehaviour
 		}
 
 		BuildTurret(bm.GetTurretToBuild());
-		collections.SpentEnergy(bm.selectedTurret.energyCost);
 	}
 
 	#endregion
@@ -109,7 +108,9 @@ public class Node : MonoBehaviour
 
 	void BuildTurret (Turret blueprint)
 	{
-		if (GameManager.Energy < blueprint.energyCost)
+		turretBlueprint = blueprint;
+
+		if (GameManager.Energy < blueprint.currentBlueprint.energyCost)
 		{
 			Debug.Log("Not Enough Money!");
 			collections.energyAnim.ResetTrigger("SpentEnergy");
@@ -117,10 +118,9 @@ public class Node : MonoBehaviour
 			return;
 		}
 
-		GameManager.Energy -= blueprint.energyCost;
-		collections.energyAnim.SetTrigger("SpentEnergy");
+		collections.SpentEnergy(bm.selectedTurret.currentBlueprint.energyCost);
+		GameManager.Energy -= turretBlueprint.currentBlueprint.energyCost;
 
-		turretBlueprint = blueprint;
 		//Build Turret
 		GameObject _turret = Instantiate(blueprint.currentBlueprint.turretPrefab, GetBuildPosition(), Quaternion.identity);
 		turret = _turret;
@@ -131,27 +131,32 @@ public class Node : MonoBehaviour
 
 	public void SellTurret()
 	{
-		collections.GainedEnergy(turret.GetComponent<Turret>().currentBlueprint.sellPrice);
+		collections.GainedEnergy(turretBlueprint.currentBlueprint.sellPrice);
 
 		Destroy(turret);
 	}
 
 	public void UpgradeTurret()
 	{
-		if (GameManager.Energy < turretBlueprint.currentBlueprint.upgradeCost[upgradeLevel - 1])
+		Turret currTurret = turret.GetComponent<Turret>();
+		if (GameManager.Energy < currTurret.currentBlueprint.upgradeCost[upgradeLevel - 1])
 		{
-			Debug.Log("Not Enough Money!");
+			upgrades.upgradeButton.image.color = noEnergyColor;
 			collections.energyAnim.ResetTrigger("SpentEnergy");
 
 			return;
 		}
-		if (upgradeLevel >= turretBlueprint.currentBlueprint.upgradeCost.Length)
+		else
+		{
+			upgrades.upgradeButton.image.color = hasEnergyColor;
+		}
+		if (upgradeLevel >= currTurret.currentBlueprint.upgradeCost.Length)
 		{
 			upgrades.upgradeButton.enabled = false;
 			return;
 		}
 
-		GameManager.Energy -= turretBlueprint.currentBlueprint.upgradeCost[upgradeLevel - 1];
+		GameManager.Energy -= currTurret.currentBlueprint.upgradeCost[upgradeLevel - 1];
 		collections.energyAnim.SetTrigger("SpentEnergy");
 		isUpgraded = true;
 
@@ -160,6 +165,9 @@ public class Node : MonoBehaviour
 		turretBlueprint.sellPrice *= upgradeSP;
 		turretBlueprint.hp += upgradeHP;
 		turretBlueprint.fireRate *= upgradeFR;
+
+
+		upgradeLevel++;
 
 		GameObject turretBE = Instantiate(bm.buildEffect, GetBuildPosition(), Quaternion.identity);
 		Destroy(turretBE, 5f);

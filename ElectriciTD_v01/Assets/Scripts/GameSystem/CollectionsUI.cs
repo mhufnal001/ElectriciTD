@@ -45,6 +45,9 @@ public class CollectionsUI : MonoBehaviour
 	{
 		spentEnergyText.text = "-" + eSpent;
 		spentEnergyText.enabled = true;
+		energyAnim.SetTrigger("SpentEnergy");
+
+
 	}
 
 	public void GainedEnergy(int energyGained)
