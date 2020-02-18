@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 58c280132323d184cb9128c0c466be64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hasEnergyColor: {r: 0.32, g: 1, b: 0.32, a: 1}
+  hasEnergyColor: {r: 0.32156864, g: 0, b: 1, a: 1}
   noEnergyColor: {r: 1, g: 0.3, b: 0.3, a: 1}
   turretPosOffset: {x: 0, y: 2, z: 0}
   turret: {fileID: 0}

@@ -90,7 +90,7 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 4a3142e078f3de74395f707748c80615, type: 2}
-  - {fileID: 2100000, guid: 7fc59a8d843dc2b4f998bfbccb907240, type: 2}
+  - {fileID: 2100000, guid: 25cb781b39c64c5408dd894c2e6e7865, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -177,6 +177,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentBlueprint: {fileID: 11400000, guid: 02fbdb6ed26db7049b08960abbfa1dd8, type: 2}
+  range: 0
+  fireRate: 0
+  turnSpeed: 0
+  ad: 0
+  hp: 0
+  energyCost: 0
+  sellPrice: 0
 --- !u!1 &7847912370596770305
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,7 +241,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 7fc59a8d843dc2b4f998bfbccb907240, type: 2}
+  - {fileID: 2100000, guid: 25cb781b39c64c5408dd894c2e6e7865, type: 2}
   - {fileID: 2100000, guid: 3273854c15635db41865d3be2f451cf5, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0

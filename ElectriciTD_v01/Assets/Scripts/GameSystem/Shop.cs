@@ -8,9 +8,11 @@ public class Shop : MonoBehaviour
 
 	BuildManager bm;
 	public TurretBlueprints[] turretTypes;
+	private Color noEnergyColor, hasEnergyColor;
 
 	public Text energyText;
-	public TextMeshProUGUI standardTurret, heavyTurret;
+	public Button sTurButton, hTurButton;
+	public TextMeshProUGUI sTurCostTxt, hTurCostTxt;
 
     #endregion
 
@@ -19,14 +21,37 @@ public class Shop : MonoBehaviour
     void Start()
     {
 		bm = BuildManager.instance;
+		noEnergyColor = Color.red;
+		hasEnergyColor = sTurCostTxt.faceColor;
     }
 
     void Update()
     {
 		energyText.text = GameManager.Energy.ToString();
-		standardTurret.text = turretTypes[0].energyCost.ToString();
-		heavyTurret.text = turretTypes[1].energyCost.ToString();
-    }
+		sTurCostTxt.text = turretTypes[0].energyCost.ToString();
+		hTurCostTxt.text = turretTypes[1].energyCost.ToString();
+
+		if (GameManager.Energy < turretTypes[0].energyCost)
+		{
+			sTurCostTxt.faceColor = noEnergyColor;
+			sTurButton.interactable = false;
+		}
+		else
+		{
+			sTurCostTxt.faceColor = hasEnergyColor;
+			sTurButton.interactable = true;
+		}
+		if (GameManager.Energy < turretTypes[1].energyCost)
+		{
+			hTurCostTxt.faceColor = noEnergyColor;
+			hTurButton.interactable = false;
+		}
+		else
+		{
+			hTurCostTxt.faceColor = hasEnergyColor;
+			hTurButton.interactable = true;
+		}
+	}
 
     #endregion
 

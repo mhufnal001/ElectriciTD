@@ -48,8 +48,25 @@ public class Node : MonoBehaviour
 
     void Update()
     {
-        
-    }
+		if (turret == null)
+		{
+			return;
+		}
+		else
+		{
+			if (GameManager.Energy < turret.GetComponent<Turret>().currentBlueprint.upgradeCost[upgradeLevel - 1])
+			{
+				upgrades.upgradeButton.image.color = noEnergyColor;
+				collections.energyAnim.ResetTrigger("SpentEnergy");
+
+				return;
+			}
+			else
+			{
+				upgrades.upgradeButton.image.color = hasEnergyColor;
+			}
+		}
+	}	
 
 	private void OnMouseEnter()
 	{
@@ -77,8 +94,18 @@ public class Node : MonoBehaviour
 
 	private void OnMouseDown()
 	{
+
 		if (EventSystem.current.IsPointerOverGameObject())
 		{
+			return;
+		}
+
+
+		if (turret != null)
+		{
+			turret.GetComponent<Turret>().rangeIndicator.SetActive(!turret.GetComponent<Turret>().rangeIndicator.activeInHierarchy);
+			bm.SelectNode(this);
+			bm.canUpgrade = true;
 			return;
 		}
 
@@ -86,14 +113,6 @@ public class Node : MonoBehaviour
 		{
 			return;
 		}
-
-		if (turret != null)
-		{
-			bm.SelectNode(this);
-			bm.canUpgrade = true;
-			return;
-		}
-
 		BuildTurret(bm.GetTurretToBuild());
 	}
 
@@ -120,6 +139,7 @@ public class Node : MonoBehaviour
 
 		collections.SpentEnergy(bm.selectedTurret.currentBlueprint.energyCost);
 		GameManager.Energy -= turretBlueprint.currentBlueprint.energyCost;
+		turretBlueprint.rangeIndicator.SetActive(false);
 
 		//Build Turret
 		GameObject _turret = Instantiate(blueprint.currentBlueprint.turretPrefab, GetBuildPosition(), Quaternion.identity);
@@ -139,20 +159,10 @@ public class Node : MonoBehaviour
 	public void UpgradeTurret()
 	{
 		Turret currTurret = turret.GetComponent<Turret>();
-		if (GameManager.Energy < currTurret.currentBlueprint.upgradeCost[upgradeLevel - 1])
-		{
-			upgrades.upgradeButton.image.color = noEnergyColor;
-			collections.energyAnim.ResetTrigger("SpentEnergy");
 
-			return;
-		}
-		else
-		{
-			upgrades.upgradeButton.image.color = hasEnergyColor;
-		}
 		if (upgradeLevel >= currTurret.currentBlueprint.upgradeCost.Length)
 		{
-			upgrades.upgradeButton.enabled = false;
+			upgrades.upgradeButton.interactable = false;
 			return;
 		}
 
@@ -160,11 +170,11 @@ public class Node : MonoBehaviour
 		collections.energyAnim.SetTrigger("SpentEnergy");
 		isUpgraded = true;
 
-		turretBlueprint.ad *= upgradeAV;
-		turretBlueprint.range += upgradeRange;
-		turretBlueprint.sellPrice *= upgradeSP;
-		turretBlueprint.hp += upgradeHP;
-		turretBlueprint.fireRate *= upgradeFR;
+		currTurret.ad *= upgradeAV;
+		currTurret.range += upgradeRange;
+		currTurret.sellPrice *= upgradeSP;
+		currTurret.hp += upgradeHP;
+		currTurret.fireRate *= upgradeFR;
 
 
 		upgradeLevel++;

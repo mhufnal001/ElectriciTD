@@ -5,6 +5,7 @@ public class Turret : MonoBehaviour
 	#region Variables
 
 	public TurretBlueprints currentBlueprint;
+	public GameObject rangeIndicator;
 
 	public float range;
 	public float fireRate;
@@ -27,9 +28,10 @@ public class Turret : MonoBehaviour
 		hp = currentBlueprint.health;
 		energyCost = currentBlueprint.energyCost;
 		sellPrice = currentBlueprint.sellPrice;
+
 	}
 
-    void Update()
+	void Update()
     {
         
     }

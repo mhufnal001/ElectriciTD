@@ -7,11 +7,12 @@ public class UpgradeUI : MonoBehaviour
 	#region Variables
 
 	private GameObject turretToUpgrade;
+	private Turret turret;
 	public Animator upgradeUI;
 	public Animator shopUI;
 	public Animator settingsUI;
-	public Button upgIcButton;
 	public Button upgradeButton;
+	public Button upgIcButton;
 	public Button shopIcButton;
 	public Button settIcButton;
 	public CollectionsUI collections;
@@ -20,8 +21,8 @@ public class UpgradeUI : MonoBehaviour
 	[Space]
 	[Header("UpgradeUI")]
 	public Image turretIcon;
-	public Text upgradeCost, sellValue;
 	public TextMeshProUGUI turretName;
+	public TextMeshProUGUI damage, health, range, fireRate, upgradeCost, sellValue;
 
 
 	bool isUpgradeActive, isShopActive, isSettingsActive;
@@ -33,34 +34,57 @@ public class UpgradeUI : MonoBehaviour
     {
 		isUpgradeActive = false;
 		isShopActive = true;
+		isSettingsActive = true;
+		
     }
 
     void Update()
     {
 		if (isShopActive == true)
 		{
-			shopIcButton.enabled = false;
 			shopIcButton.animator.SetTrigger("Disabled");
+			upgIcButton.animator.SetTrigger("Normal");
+			settIcButton.animator.SetTrigger("Normal");
 
-			upgIcButton.enabled = true;
+			isSettingsActive = false;
+			isUpgradeActive = false;
+
 		}
 		else if (isUpgradeActive == true || turretToUpgrade == null)
 		{
-			upgIcButton.enabled = false;
 			upgIcButton.animator.SetTrigger("Disabled");
-			shopIcButton.enabled = true;
+			shopIcButton.animator.SetTrigger("Normal");
+			isSettingsActive = false;
+			isShopActive = false;
 		}
+		else if (isSettingsActive == true)
+		{
+			shopIcButton.animator.SetTrigger("Normal");
+			settIcButton.animator.SetTrigger("Disabled");
+			upgIcButton.animator.SetTrigger("Disabled");
+
+			isShopActive = false;
+			isUpgradeActive = false;
+		}
+
 		if (turretToUpgrade != null)
 		{
-			turretIcon.sprite = turretToUpgrade.GetComponent<Turret>().currentBlueprint.turretIcon;
-			turretName.text = turretToUpgrade.GetComponent<Turret>().currentBlueprint.turretName;
-			upgradeCost.text = turretToUpgrade.GetComponent<Turret>().currentBlueprint.upgradeCost[target.upgradeLevel - 1].ToString();
-			sellValue.text = turretToUpgrade.GetComponent<Turret>().currentBlueprint.sellPrice.ToString();
+			turret = turretToUpgrade.GetComponent<Turret>();
+
+			turretIcon.sprite = turret.currentBlueprint.turretIcon;
+			turretName.text = turret.currentBlueprint.turretName;
+			upgradeCost.text = turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1].ToString();
+			sellValue.text = turret.sellPrice.ToString();
 		}
 		else
 		{
 			return;
 		}
+
+		damage.text = turret.ad.ToString();
+		health.text = turret.hp.ToString();
+		range.text = turret.range.ToString();
+		fireRate.text = turret.fireRate.ToString();
 
 	}
 	#endregion

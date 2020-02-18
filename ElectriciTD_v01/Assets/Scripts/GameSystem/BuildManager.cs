@@ -27,7 +27,7 @@ public class BuildManager : MonoBehaviour
 	private GameObject turretToBuild;
 	[HideInInspector]
 	public Turret selectedTurret;
-	private Node selectedNode;
+	public Node selectedNode;
 
 	public GameObject buildEffect;
 	public GameObject upgradeUI;
@@ -46,7 +46,7 @@ public class BuildManager : MonoBehaviour
     {
 		selectedTurret = null;
 		canUpgrade = false;
-    }
+	}
 
     void Update()
     {
@@ -66,12 +66,6 @@ public class BuildManager : MonoBehaviour
 
 	public void SelectNode(Node node)
 	{
-		if (selectedNode == node)
-		{
-			DeselectNode();
-			return;
-		}
-
 		selectedNode = node;
 		turretToBuild = null;
 		upgrade.SetNode(node);
