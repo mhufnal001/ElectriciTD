@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using TMPro;
 
 public class WaveSpawner : MonoBehaviour
 {
@@ -8,10 +9,10 @@ public class WaveSpawner : MonoBehaviour
 	public static int EnemiesAlive = 0;
 
 	public Transform spawnPoint;
+	public GameObject waveOverUI;
+	public TextMeshProUGUI spawnWaveText, waveTitleText;
+	private string currText;
 	public Wave[] waves;
-
-	public float timeBetweenWaves = 5f;
-	private float countdown = 2f;
 
 	private int waveIndex = 0;
     #endregion
@@ -19,24 +20,31 @@ public class WaveSpawner : MonoBehaviour
     #region Unity Methods
     void Start()
     {
-        
+		currText = spawnWaveText.text;
     }
 
     void Update()
     {
 		if (EnemiesAlive > 0)
 		{
+			waveOverUI.SetActive(false);
 			return;
 		}
-
-		if (countdown <= 0f)
+		else if (EnemiesAlive <= 0)
 		{
-			StartCoroutine(SpawnWave());
-			countdown = timeBetweenWaves;
-			return;
+			if (GameManager.Rounds == 0)
+			{
+				waveTitleText.text = "New Game";
+				spawnWaveText.text = "Start Wave?";
+			}
+			else
+			{
+				waveOverUI.SetActive(true);
+				waveTitleText.text = "Wave: " + waveIndex.ToString();
+				spawnWaveText.text = currText;
+			}
 		}
 
-		countdown -= Time.deltaTime;
     }
 	#endregion
 
@@ -65,6 +73,11 @@ public class WaveSpawner : MonoBehaviour
 	{
 		Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
 		EnemiesAlive++;
+	}
+
+	public void StartNextWave()
+	{
+		StartCoroutine(SpawnWave());
 	}
 	#endregion
 }

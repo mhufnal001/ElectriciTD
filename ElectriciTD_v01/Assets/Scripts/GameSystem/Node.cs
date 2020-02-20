@@ -48,24 +48,7 @@ public class Node : MonoBehaviour
 
     void Update()
     {
-		if (turret == null)
-		{
-			return;
-		}
-		else
-		{
-			if (GameManager.Energy < turret.GetComponent<Turret>().currentBlueprint.upgradeCost[upgradeLevel - 1])
-			{
-				upgrades.upgradeButton.image.color = noEnergyColor;
-				collections.energyAnim.ResetTrigger("SpentEnergy");
 
-				return;
-			}
-			else
-			{
-				upgrades.upgradeButton.image.color = hasEnergyColor;
-			}
-		}
 	}	
 
 	private void OnMouseEnter()
@@ -88,6 +71,10 @@ public class Node : MonoBehaviour
 
 	private void OnMouseExit()
 	{
+		if (turret != null)
+		{
+			turret.GetComponent<Turret>().rangeIndicator.SetActive(false);
+		}
 		r.material.color = startColor;
 		return;
 	}
@@ -151,7 +138,7 @@ public class Node : MonoBehaviour
 
 	public void SellTurret()
 	{
-		collections.GainedEnergy(turretBlueprint.currentBlueprint.sellPrice);
+		collections.GainedEnergy(turretBlueprint.sellPrice);
 
 		Destroy(turret);
 	}
@@ -160,10 +147,14 @@ public class Node : MonoBehaviour
 	{
 		Turret currTurret = turret.GetComponent<Turret>();
 
-		if (upgradeLevel >= currTurret.currentBlueprint.upgradeCost.Length)
+		if (upgradeLevel > currTurret.currentBlueprint.upgradeCost.Length && GameManager.Energy < currTurret.currentBlueprint.upgradeCost[upgradeLevel])
 		{
 			upgrades.upgradeButton.interactable = false;
 			return;
+		}
+		else
+		{
+			upgrades.upgradeButton.interactable = true;
 		}
 
 		GameManager.Energy -= currTurret.currentBlueprint.upgradeCost[upgradeLevel - 1];

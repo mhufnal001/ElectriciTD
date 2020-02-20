@@ -17,11 +17,12 @@ public class UpgradeUI : MonoBehaviour
 	public Button settIcButton;
 	public CollectionsUI collections;
 	public Node target;
+	private string currText;
 
 	[Space]
 	[Header("UpgradeUI")]
 	public Image turretIcon;
-	public TextMeshProUGUI turretName;
+	public TextMeshProUGUI turretName, upgradeText;
 	public TextMeshProUGUI damage, health, range, fireRate, upgradeCost, sellValue;
 
 
@@ -35,6 +36,7 @@ public class UpgradeUI : MonoBehaviour
 		isUpgradeActive = false;
 		isShopActive = true;
 		isSettingsActive = true;
+		currText = upgradeText.text;
 		
     }
 
@@ -86,6 +88,19 @@ public class UpgradeUI : MonoBehaviour
 		range.text = turret.range.ToString();
 		fireRate.text = turret.fireRate.ToString();
 
+		if (GameManager.Energy < turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1])
+		{
+			upgradeText.text = "Need " + (turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1] - GameManager.Energy).ToString() + " more Energy.";
+			upgradeButton.image.color = Color.red;
+			upgradeButton.interactable = false;
+		}
+		else
+		{
+			upgradeText.text = currText;
+			upgradeButton.image.color = Color.green;
+			upgradeButton.interactable = true;
+		}
+
 	}
 	#endregion
 
@@ -98,8 +113,7 @@ public class UpgradeUI : MonoBehaviour
 
 	public void SetTurretToUpgrade()
 	{
-		Node node = BuildManager.instance.GetSelectedNode();
-		turretToUpgrade = node.turret;
+		turretToUpgrade = target.turret;
 	}
 
 	public void UpgradeActive()
@@ -166,16 +180,19 @@ public class UpgradeUI : MonoBehaviour
 
 		}
 	}
+
 	public void UpgradeTurret()
 	{
-		target.UpgradeTurret();
+		if (GameManager.Energy >= turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1])
+		{
+			target.UpgradeTurret();
+		}
 	}
 
 	public void Sell()
 	{
-		Node node = BuildManager.instance.GetSelectedNode();
 		ShopActive();
-		node.SellTurret();
+		target.SellTurret();
 	}
 
     #endregion	
