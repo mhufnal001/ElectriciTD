@@ -26,7 +26,7 @@ public class UpgradeUI : MonoBehaviour
 	public TextMeshProUGUI damage, health, range, fireRate, upgradeCost, sellValue;
 
 
-	bool isUpgradeActive, isShopActive, isSettingsActive;
+	 public bool isUpgradeActive, isShopActive, isSettingsActive;
 
     #endregion
 
@@ -35,7 +35,7 @@ public class UpgradeUI : MonoBehaviour
     {
 		isUpgradeActive = false;
 		isShopActive = true;
-		isSettingsActive = true;
+		isSettingsActive = false;
 		currText = upgradeText.text;
 		
     }
@@ -45,28 +45,29 @@ public class UpgradeUI : MonoBehaviour
 		if (isShopActive == true)
 		{
 			shopIcButton.animator.SetTrigger("Disabled");
-			upgIcButton.animator.SetTrigger("Normal");
-			settIcButton.animator.SetTrigger("Normal");
+			if (BuildManager.instance.GetTurretToBuild() != null)
+			{
+				upgIcButton.animator.SetTrigger("Normal");
+			}
+			else
+			{
+				upgIcButton.animator.SetTrigger("Disabled");
 
-			isSettingsActive = false;
-			isUpgradeActive = false;
+			}
+			settIcButton.animator.SetTrigger("Normal");
 
 		}
 		else if (isUpgradeActive == true || turretToUpgrade == null)
 		{
 			upgIcButton.animator.SetTrigger("Disabled");
 			shopIcButton.animator.SetTrigger("Normal");
-			isSettingsActive = false;
-			isShopActive = false;
+			settIcButton.animator.SetTrigger("Normal");
 		}
 		else if (isSettingsActive == true)
 		{
 			shopIcButton.animator.SetTrigger("Normal");
 			settIcButton.animator.SetTrigger("Disabled");
 			upgIcButton.animator.SetTrigger("Disabled");
-
-			isShopActive = false;
-			isUpgradeActive = false;
 		}
 
 		if (turretToUpgrade != null)
@@ -123,9 +124,9 @@ public class UpgradeUI : MonoBehaviour
 			return;
 		}
 		
+		isUpgradeActive = true;
 		SetTurretToUpgrade();
 		upgradeUI.SetTrigger("Active");
-		isUpgradeActive = true;
 
 		if (isShopActive)
 		{
@@ -133,7 +134,7 @@ public class UpgradeUI : MonoBehaviour
 
 			isShopActive = false;
 		}
-		else if (isSettingsActive)
+		if (isSettingsActive)
 		{
 			settingsUI.SetTrigger("Inactive");
 			isSettingsActive = false;
@@ -143,8 +144,8 @@ public class UpgradeUI : MonoBehaviour
 	}
 	public void ShopActive()
 	{
-		shopUI.SetTrigger("Active");
 		isShopActive = true;
+		shopUI.SetTrigger("Active");
 		BuildManager.instance.DeselectNode();
 
 		if (isUpgradeActive)
@@ -153,7 +154,7 @@ public class UpgradeUI : MonoBehaviour
 
 			isUpgradeActive = false;
 		}
-		else if (isSettingsActive)
+		if (isSettingsActive == true)
 		{
 			settingsUI.SetTrigger("Inactive");
 			isSettingsActive = false;
@@ -163,8 +164,8 @@ public class UpgradeUI : MonoBehaviour
 
 	public void OptionsActive()
 	{
-		settingsUI.SetTrigger("Active");
 		isSettingsActive = true;
+		settingsUI.SetTrigger("Active");
 		BuildManager.instance.DeselectNode();
 
 		if (isUpgradeActive)
@@ -172,8 +173,9 @@ public class UpgradeUI : MonoBehaviour
 			upgradeUI.SetTrigger("Inactive");
 
 			isUpgradeActive = false;
+
 		}
-		else if (isShopActive)
+		if (isShopActive)
 		{
 			shopUI.SetTrigger("Inactive");
 			isShopActive = false;

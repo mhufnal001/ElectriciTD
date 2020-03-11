@@ -14545,8 +14545,8 @@ RectTransform:
   - {fileID: 511990961}
   - {fileID: 1952083788}
   - {fileID: 1167960875}
-  - {fileID: 1232182367}
   - {fileID: 1631589198}
+  - {fileID: 1232182367}
   - {fileID: 1419796196}
   m_Father: {fileID: 1967547770}
   m_RootOrder: 0
@@ -14605,6 +14605,9 @@ MonoBehaviour:
   fireRate: {fileID: 1454186869}
   upgradeCost: {fileID: 1285121888}
   sellValue: {fileID: 639408376}
+  isUpgradeActive: 0
+  isShopActive: 0
+  isSettingsActive: 0
 --- !u!114 &1221499764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14674,7 +14677,7 @@ RectTransform:
   - {fileID: 1810711650}
   - {fileID: 921707149}
   m_Father: {fileID: 1221499761}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -18673,7 +18676,7 @@ RectTransform:
   - {fileID: 1643246003}
   - {fileID: 690342191}
   m_Father: {fileID: 1221499761}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 1}
