@@ -64,9 +64,9 @@ public class WaveSpawner : MonoBehaviour
 
 		if (waveIndex == waves.Length)
 		{
-			Debug.Log("You Win Bitch!");
-			this.enabled = false;
+			GameManager.GameWon = true;
 		}
+
 	}
 
 	void SpawnEnemy(GameObject enemy)

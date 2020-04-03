@@ -34,10 +34,13 @@ public class GameManager : MonoBehaviour
 	public int startPower = 0;
 	public CollectionsUI collections;
 
+	private Wave wave;
 	public static bool GameOver;
+	public static bool GameWon;
 	[Space]
 	[Header("Assigned Variables")]
 	public GameObject gameOverUI;
+	public GameObject gameWonUI;
     #endregion
 
     #region Unity Methods
@@ -49,6 +52,7 @@ public class GameManager : MonoBehaviour
 
 		Rounds = 0;
 		GameOver = false;
+		GameWon = false;
     }
 
     void Update()
@@ -60,7 +64,12 @@ public class GameManager : MonoBehaviour
 
 		if (Power >= maxPower)
 		{
-			EndGame();
+			GameOver = true;
+			EndGame(true);
+		}
+		if (GameWon)
+		{
+			EndGame(true);
 		}
     }
 
@@ -68,11 +77,16 @@ public class GameManager : MonoBehaviour
 
     #region User Methods
 
-	void EndGame()
+	void EndGame(bool gameOver)
 	{
-		GameOver = true;
-
-		gameOverUI.SetActive(true);
+		if (GameOver == true && GameWon == false)
+		{
+			gameOverUI.SetActive(true);
+		}
+		else if (GameWon == true && GameOver == false)
+		{
+			gameWonUI.SetActive(true);
+		}
 	}
 	#endregion
 }
