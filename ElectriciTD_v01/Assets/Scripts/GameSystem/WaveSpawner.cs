@@ -15,22 +15,26 @@ public class WaveSpawner : MonoBehaviour
 	public Wave[] waves;
 
 	private int waveIndex = 0;
+	private bool roundStart;
+	private bool maxEnemies;
     #endregion
 
     #region Unity Methods
     void Start()
     {
+		roundStart = false;
+		maxEnemies = false;
 		currText = spawnWaveText.text;
     }
 
     void Update()
     {
-		if (EnemiesAlive > 0)
+		if (roundStart)
 		{
 			waveOverUI.SetActive(false);
 			return;
 		}
-		else if (EnemiesAlive <= 0)
+		else if (roundStart == false)
 		{
 			if (GameManager.Rounds == 0)
 			{
@@ -60,11 +64,20 @@ public class WaveSpawner : MonoBehaviour
 			yield return new WaitForSeconds(1f / wave.rate);
 		}
 
-		waveIndex++;
 
 		if (waveIndex == waves.Length)
 		{
 			GameManager.GameWon = true;
+		}
+
+		if (EnemiesAlive >= wave.count)
+		{
+			maxEnemies = true;
+
+			if (maxEnemies && EnemiesAlive <= 0)
+			{
+				roundStart = false;
+			}
 		}
 
 	}
@@ -77,7 +90,9 @@ public class WaveSpawner : MonoBehaviour
 
 	public void StartNextWave()
 	{
+		roundStart = true;
 		StartCoroutine(SpawnWave());
+		waveIndex++;
 	}
 	#endregion
 }

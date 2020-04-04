@@ -1,22 +1,36 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameWon : MonoBehaviour
 {
-    #region Variables
-    #endregion
+	#region Variables
 
-    #region Unity Methods
-    void Start()
-    {
-        
-    }
+	#endregion
 
-    void Update()
-    {
-        
-    }
-    #endregion
+	#region Unity Methods
+	void Start()
+	{
 
-    #region User Methods
-    #endregion	
+	}
+
+	void Update()
+	{
+
+	}
+	#endregion
+
+	#region User Methods
+
+	public void Retry()
+	{
+		SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+	}
+
+	public void Menu()
+	{
+		Debug.Log("Go To Menu.");
+	}
+
+	#endregion
 }
