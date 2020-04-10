@@ -65,12 +65,12 @@ public class WaveSpawner : MonoBehaviour
 		}
 
 
-		if (waveIndex == waves.Length)
+		if (waveIndex == waves.Length && EnemiesAlive <= 0)
 		{
 			GameManager.GameWon = true;
 		}
 
-		if (EnemiesAlive >= wave.count)
+		if (EnemiesAlive >= waves[waveIndex].count)
 		{
 			maxEnemies = true;
 
