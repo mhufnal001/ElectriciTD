@@ -7,7 +7,7 @@ public class WaveSpawner : MonoBehaviour
 	#region Variables
 
 	public static int EnemiesAlive = 0;
-
+	public int numberOfEnemies;
 	public Transform spawnPoint;
 	public GameObject waveOverUI;
 	public TextMeshProUGUI spawnWaveText, waveTitleText;
@@ -15,8 +15,9 @@ public class WaveSpawner : MonoBehaviour
 	public Wave[] waves;
 
 	private int waveIndex = 0;
-	private bool roundStart;
-	private bool maxEnemies;
+	public int waveCount;
+	public bool roundStart;
+	public bool maxEnemies;
     #endregion
 
     #region Unity Methods
@@ -29,33 +30,58 @@ public class WaveSpawner : MonoBehaviour
 
     void Update()
     {
-		if (roundStart)
+		if (roundStart == false)
 		{
-			waveOverUI.SetActive(false);
-			return;
-		}
-		else if (roundStart == false)
-		{
-			if (GameManager.Rounds == 0)
+			if (GameManager.Rounds <= 0)
 			{
 				waveTitleText.text = "New Game";
 				spawnWaveText.text = "Start Wave?";
 			}
-			else
-			{
-				waveOverUI.SetActive(true);
-				waveTitleText.text = "Wave: " + waveIndex.ToString();
-				spawnWaveText.text = currText;
-			}
 		}
 
-    }
+		numberOfEnemies = EnemiesAlive;
+		if (roundStart)
+		{
+			waveCount = waves[waveIndex - 1].count;
+		}
+		else
+		{
+			return;
+		}
+
+		if (EnemiesAlive >= waveCount)
+		{
+			maxEnemies = true;
+		}
+
+		if (maxEnemies && EnemiesAlive <= 0)
+		{
+			roundStart = false;
+		}
+
+		if (GameManager.Rounds > 0 && roundStart == false)
+		{
+			waveOverUI.SetActive(true);
+			waveTitleText.text = "Wave: " + waveIndex.ToString();
+			spawnWaveText.text = currText;
+		}
+
+		if (waveIndex == waves.Length && EnemiesAlive <= 0)
+		{
+			GameManager.GameWon = true;
+		}
+		else
+		{
+			return;
+		}
+	}
 	#endregion
 
 	#region User Methods
 	IEnumerator SpawnWave()
 	{
 		GameManager.Rounds++;
+		maxEnemies = false;
 		Wave wave = waves[waveIndex];
 
 		for (int i = 0; i < wave.count; i++)
@@ -63,23 +89,6 @@ public class WaveSpawner : MonoBehaviour
 			SpawnEnemy(wave.enemy);
 			yield return new WaitForSeconds(1f / wave.rate);
 		}
-
-
-		if (waveIndex == waves.Length && EnemiesAlive <= 0)
-		{
-			GameManager.GameWon = true;
-		}
-
-		if (EnemiesAlive >= waves[waveIndex].count)
-		{
-			maxEnemies = true;
-
-			if (maxEnemies && EnemiesAlive <= 0)
-			{
-				roundStart = false;
-			}
-		}
-
 	}
 
 	void SpawnEnemy(GameObject enemy)

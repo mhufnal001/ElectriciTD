@@ -57,11 +57,6 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-		if (GameOver)
-		{
-			return;
-		}
-
 		if (Power >= maxPower)
 		{
 			GameOver = true;
