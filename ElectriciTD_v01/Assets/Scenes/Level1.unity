@@ -1741,7 +1741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 14a58020a32f3224fade7250b012c12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfEnemies: 0
+  enemiesSpawned: 0
   spawnPoint: {fileID: 2121745468}
   waveOverUI: {fileID: 1952083787}
   spawnWaveText: {fileID: 1025921413}

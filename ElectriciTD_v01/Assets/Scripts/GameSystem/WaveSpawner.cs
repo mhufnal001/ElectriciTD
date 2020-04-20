@@ -7,7 +7,7 @@ public class WaveSpawner : MonoBehaviour
 	#region Variables
 
 	public static int EnemiesAlive = 0;
-	public int numberOfEnemies;
+	public int enemiesSpawned = 0;
 	public Transform spawnPoint;
 	public GameObject waveOverUI;
 	public TextMeshProUGUI spawnWaveText, waveTitleText;
@@ -38,8 +38,6 @@ public class WaveSpawner : MonoBehaviour
 				spawnWaveText.text = "Start Wave?";
 			}
 		}
-
-		numberOfEnemies = EnemiesAlive;
 		if (roundStart)
 		{
 			waveCount = waves[waveIndex - 1].count;
@@ -49,7 +47,7 @@ public class WaveSpawner : MonoBehaviour
 			return;
 		}
 
-		if (EnemiesAlive >= waveCount)
+		if (enemiesSpawned >= waveCount)
 		{
 			maxEnemies = true;
 		}
@@ -94,12 +92,14 @@ public class WaveSpawner : MonoBehaviour
 	void SpawnEnemy(GameObject enemy)
 	{
 		Instantiate(enemy, spawnPoint.position, spawnPoint.rotation);
+		enemiesSpawned++;
 		EnemiesAlive++;
 	}
 
 	public void StartNextWave()
 	{
 		roundStart = true;
+		enemiesSpawned = 0;
 		StartCoroutine(SpawnWave());
 		waveIndex++;
 	}
