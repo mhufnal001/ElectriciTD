@@ -12,6 +12,7 @@ public class Node : MonoBehaviour
 	public Vector3 turretPosOffset;
 
 	public GameObject turret;
+	public GameObject rangeInd;
 	public Turret turretBlueprint;
 	[HideInInspector]
 	public bool isUpgraded = false;
@@ -21,15 +22,16 @@ public class Node : MonoBehaviour
 	public UpgradeUI upgrades;
 
 	private Renderer r;
-	[HideInInspector]
-	public int upgradeLevel;
 
 	[Header("Upgrade Modifers")]
-	public int upgradeAV = 2;
-	public int upgradeRange = 2;
+	public int upgradeLevel;
+	public float upgradeAD = 1.15f;
+	public float upgradeRange = 1.25f;
 	public int upgradeSP = 2;
 	public int upgradeHP = 100;
 	public float upgradeFR = 1.05f;
+	public Vector3 turretRangeUpgrade;
+	public bool maxLevel;
 
 	BuildManager bm;
 
@@ -40,14 +42,45 @@ public class Node : MonoBehaviour
     void Start()
     {
 		bm = BuildManager.instance;
+		maxLevel = false;
 
 		r = GetComponent<Renderer>();
 		startColor = r.material.color;
+
 		upgradeLevel = 1;
     }
 
     void Update()
     {
+		if (turret != null)
+		{
+			if (upgradeLevel >= turretBlueprint.currentBlueprint.upgradeCost.Length)
+			{
+				maxLevel = true;
+				if (maxLevel)
+				{
+					upgrades.upgradeButton.image.color = Color.red;
+					upgrades.upgradeButton.interactable = false;
+					upgrades.upgradeText.text = "Max Level";
+
+					
+				}
+
+			}
+		}
+		else if (turret == null)
+		{
+			return;
+		}
+
+		if (rangeInd != null)
+		{
+			upgrades.range.text = rangeInd.transform.localScale.x.ToString();
+		}
+		else
+		{
+			return;
+		}
 
 	}	
 
@@ -90,7 +123,10 @@ public class Node : MonoBehaviour
 
 		if (turret != null)
 		{
-			turret.GetComponent<Turret>().rangeIndicator.SetActive(!turret.GetComponent<Turret>().rangeIndicator.activeInHierarchy);
+			turretBlueprint = turret.GetComponent<Turret>();
+			rangeInd = turretBlueprint.rangeIndicator;
+			rangeInd.SetActive(!rangeInd.activeInHierarchy);
+							
 			bm.SelectNode(this);
 			bm.canUpgrade = true;
 			return;
@@ -146,30 +182,22 @@ public class Node : MonoBehaviour
 	public void UpgradeTurret()
 	{
 		Turret currTurret = turret.GetComponent<Turret>();
-
-		if (upgradeLevel > currTurret.currentBlueprint.upgradeCost.Length && GameManager.Energy < currTurret.currentBlueprint.upgradeCost[upgradeLevel])
-		{
-			upgrades.upgradeButton.interactable = false;
-			return;
-		}
-		else
-		{
-			upgrades.upgradeButton.interactable = true;
-		}
-
-		GameManager.Energy -= currTurret.currentBlueprint.upgradeCost[upgradeLevel - 1];
-		collections.energyAnim.SetTrigger("SpentEnergy");
 		isUpgraded = true;
 
-		currTurret.ad *= upgradeAV;
+		currTurret.ad *= upgradeAD;
+		currTurret.ad = Mathf.RoundToInt(currTurret.ad);
 		currTurret.range += upgradeRange;
+		currTurret.range = Mathf.RoundToInt(currTurret.range);
 		currTurret.sellPrice *= upgradeSP;
 		currTurret.hp += upgradeHP;
 		currTurret.fireRate *= upgradeFR;
-
+		currTurret.fireRate = Mathf.RoundToInt(currTurret.fireRate);
 
 		upgradeLevel++;
 
+		turretRangeUpgrade = new Vector3(currTurret.range, 0, currTurret.range);
+		rangeInd.gameObject.transform.localScale += turretRangeUpgrade;
+		
 		GameObject turretBE = Instantiate(bm.buildEffect, GetBuildPosition(), Quaternion.identity);
 		Destroy(turretBE, 5f);
 	}

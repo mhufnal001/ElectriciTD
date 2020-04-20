@@ -36,6 +36,7 @@ public class UpgradeUI : MonoBehaviour
 		isUpgradeActive = false;
 		isShopActive = true;
 		isSettingsActive = false;
+
 		currText = upgradeText.text;
 		
     }
@@ -76,18 +77,21 @@ public class UpgradeUI : MonoBehaviour
 
 			turretIcon.sprite = turret.currentBlueprint.turretIcon;
 			turretName.text = turret.currentBlueprint.turretName;
-			upgradeCost.text = turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1].ToString();
+			if (target.maxLevel == false)
+			{
+				upgradeCost.text = turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1].ToString();
+			}
+			else
+			{
+				upgradeCost.text = "";
+				return;
+			}
 			sellValue.text = turret.sellPrice.ToString();
 		}
 		else
 		{
 			return;
 		}
-
-		damage.text = turret.ad.ToString();
-		health.text = turret.hp.ToString();
-		range.text = turret.range.ToString();
-		fireRate.text = turret.fireRate.ToString();
 
 		if (GameManager.Energy < turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1])
 		{
@@ -185,10 +189,19 @@ public class UpgradeUI : MonoBehaviour
 
 	public void UpgradeTurret()
 	{
+
 		if (GameManager.Energy >= turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1])
 		{
+			GameManager.Energy -= turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1];
+			collections.SpentEnergy(turret.currentBlueprint.upgradeCost[target.upgradeLevel - 1]);
+			collections.energyAnim.SetTrigger("SpentEnergy");
 			target.UpgradeTurret();
 		}
+
+		damage.text = turret.ad.ToString();
+		health.text = turret.hp.ToString();
+		fireRate.text = turret.fireRate.ToString();
+
 	}
 
 	public void Sell()

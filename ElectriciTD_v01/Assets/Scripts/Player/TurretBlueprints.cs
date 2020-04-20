@@ -16,7 +16,7 @@ public class TurretBlueprints : ScriptableObject
 	public float fireRate;
 	public float turnSpeed;
 
-	public int attackValue;
+	public float attackValue;
 	public int health;
 	public int energyCost;
 	public int sellPrice;
