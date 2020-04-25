@@ -1747,36 +1747,36 @@ MonoBehaviour:
   spawnWaveText: {fileID: 1025921413}
   waveTitleText: {fileID: 961115121}
   waves:
-  - enemy: {fileID: 5138401158858659317, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
+  - enemy: {fileID: 7654017003599258326, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
     count: 5
     rate: 1
-  - enemy: {fileID: 5138401158858659317, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
+  - enemy: {fileID: 7654017003599258326, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
     count: 10
     rate: 0.75
-  - enemy: {fileID: 5138401158858659317, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
+  - enemy: {fileID: 4606947518199400517, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
+    count: 5
+    rate: 1.25
+  - enemy: {fileID: 7654017003599258326, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
+    count: 25
+    rate: 0.5
+  - enemy: {fileID: 4606947518199400517, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
+    count: 15
+    rate: 0.75
+  - enemy: {fileID: 4606947518199400517, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
     count: 20
     rate: 0.5
-  - enemy: {fileID: 5138401158858659317, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
+  - enemy: {fileID: 7654017003599258326, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
+    count: 30
+    rate: 0.25
+  - enemy: {fileID: 4606947518199400517, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
+    count: 30
+    rate: 0.5
+  - enemy: {fileID: 4606947518199400517, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
     count: 50
-    rate: 0.5
-  - enemy: {fileID: 5138401158858659317, guid: 02719106dc7adcb4e90f026c999526bb, type: 3}
-    count: 75
-    rate: 0.75
-  - enemy: {fileID: 5138401158858659317, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
-    count: 15
-    rate: 1
-  - enemy: {fileID: 5138401158858659317, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
-    count: 25
-    rate: 0.75
-  - enemy: {fileID: 5138401158858659317, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
-    count: 50
-    rate: 0.5
-  - enemy: {fileID: 5138401158858659317, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
-    count: 75
-    rate: 0.5
-  - enemy: {fileID: 5138401158858659317, guid: 9d94e0ace38505844a0d24b9cffabe84, type: 3}
-    count: 100
-    rate: 0.5
+    rate: 0.25
+  - enemy: {fileID: 168538308924866557, guid: d0d5baec0c172414b91482c90311807d, type: 3}
+    count: 2
+    rate: 5
   waveCount: 0
   roundStart: 0
   maxEnemies: 0
@@ -6454,7 +6454,7 @@ PrefabInstance:
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 39.5
+      value: 40.5
       objectReference: {fileID: 0}
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
@@ -7819,7 +7819,7 @@ PrefabInstance:
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 50
+      value: 50.5
       objectReference: {fileID: 0}
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
@@ -20951,7 +20951,7 @@ PrefabInstance:
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70
+      value: 70.5
       objectReference: {fileID: 0}
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
@@ -21423,7 +21423,7 @@ PrefabInstance:
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
@@ -22033,7 +22033,7 @@ PrefabInstance:
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 70
+      value: 71
       objectReference: {fileID: 0}
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
@@ -23537,7 +23537,7 @@ PrefabInstance:
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 14.5
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
@@ -24245,7 +24245,7 @@ PrefabInstance:
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 70
+      value: 70.5
       objectReference: {fileID: 0}
     - target: {fileID: 9001374366093352710, guid: ae6bd654eeddc5843a9342ad56640e17,
         type: 3}
