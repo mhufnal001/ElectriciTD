@@ -8,9 +8,6 @@ public class UpgradeUI : MonoBehaviour
 
 	private GameObject turretToUpgrade;
 	private Turret turret;
-	public Animator upgradeUI;
-	public Animator shopUI;
-	public Animator settingsUI;
 	public Button upgradeButton;
 	public Button upgIcButton;
 	public Button shopIcButton;
@@ -130,17 +127,9 @@ public class UpgradeUI : MonoBehaviour
 		
 		isUpgradeActive = true;
 		SetTurretToUpgrade();
-		upgradeUI.SetTrigger("Active");
-
-		if (isShopActive)
+		if (isUpgradeActive)
 		{
-			shopUI.SetTrigger("Inactive");
-
 			isShopActive = false;
-		}
-		if (isSettingsActive)
-		{
-			settingsUI.SetTrigger("Inactive");
 			isSettingsActive = false;
 
 		}
@@ -149,41 +138,22 @@ public class UpgradeUI : MonoBehaviour
 	public void ShopActive()
 	{
 		isShopActive = true;
-		shopUI.SetTrigger("Active");
 		BuildManager.instance.DeselectNode();
-
-		if (isUpgradeActive)
+		if (isShopActive)
 		{
-			upgradeUI.SetTrigger("Inactive");
-
-			isUpgradeActive = false;
-		}
-		if (isSettingsActive == true)
-		{
-			settingsUI.SetTrigger("Inactive");
 			isSettingsActive = false;
-
+			isUpgradeActive = false;
 		}
 	}
 
-	public void OptionsActive()
+	public void SettingsActive()
 	{
 		isSettingsActive = true;
-		settingsUI.SetTrigger("Active");
 		BuildManager.instance.DeselectNode();
-
-		if (isUpgradeActive)
+		if (isSettingsActive)
 		{
-			upgradeUI.SetTrigger("Inactive");
-
-			isUpgradeActive = false;
-
-		}
-		if (isShopActive)
-		{
-			shopUI.SetTrigger("Inactive");
 			isShopActive = false;
-
+			isUpgradeActive = false;
 		}
 	}
 

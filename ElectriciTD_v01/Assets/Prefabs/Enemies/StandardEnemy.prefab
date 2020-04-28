@@ -4765,6 +4765,7 @@ GameObject:
   - component: {fileID: 721767888334626573}
   - component: {fileID: 2002899364487085679}
   - component: {fileID: 1675172188796168761}
+  - component: {fileID: 4102154561445522910}
   m_Layer: 0
   m_Name: StandardEnemy
   m_TagString: Enemy
@@ -4818,6 +4819,25 @@ MonoBehaviour:
   enemyDeathEffect: {fileID: 8894343846690370800, guid: 01db6b1138421c24c81f815ecb134e22,
     type: 3}
   hp: 0
+--- !u!95 &4102154561445522910
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7654017003599258326}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2edba6a972a847c4b9ad1d87c1d9fb32, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &7848972170993189697
 GameObject:
   m_ObjectHideFlags: 0
@@ -4831,7 +4851,7 @@ GameObject:
   - component: {fileID: 4949271323845325381}
   - component: {fileID: 4613654631861847127}
   m_Layer: 0
-  m_Name: StandardEnemy
+  m_Name: StandardEnemyModel
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

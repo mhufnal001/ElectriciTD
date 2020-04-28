@@ -79,7 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 4277261755235345145, guid: eeef1ef0593c400479baab436301b745,
     type: 3}
-  currentTurret: {fileID: 11400000, guid: 463d1b29912bdab479a06f8f46e65ca2, type: 2}
+  currentTurret: {fileID: 0}
   target: {fileID: 0}
   pivotPoint: {fileID: 188039003937881007}
   firePoint: {fileID: 4758833180513134937}

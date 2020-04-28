@@ -9,9 +9,10 @@ public class SettingsMenu : MonoBehaviour
 {
 	#region Variables
 	[Header("Game Settings")]
-	public AudioMixer masterMix;
-	public TextMeshProUGUI volumeText;
+
 	public TMP_Dropdown resDropdown;
+	public AudioMixer masterMixer;
+	public TextMeshProUGUI masterVolText, musicVolText, sfxVolText;
 	Resolution[] res;
 
 	bool isPaused = false;
@@ -68,13 +69,30 @@ public class SettingsMenu : MonoBehaviour
 
     #region User Methods
 
-	public void SetVolume (float volume)
+	public void SetMasterVolume (float volume)
 	{
-		masterMix.SetFloat("MasterVolume", volume);
+		masterMixer.SetFloat("MasterVolume", volume);
+
 		float _volume = Mathf.InverseLerp(-80, 0, volume);
 		float result = Mathf.Lerp(0, 100, _volume);
 
-		volumeText.text = result.ToString("0");
+		masterVolText.text = result.ToString("0");
+	}
+	public void SetMusicVolume(float volume)
+	{
+		masterMixer.SetFloat("MusicVolume", volume);
+		float _volume = Mathf.InverseLerp(-80, -10, volume);
+		float result = Mathf.Lerp(0, 100, _volume);
+
+		musicVolText.text = result.ToString("0");
+	}
+	public void SetSFXVolume(float volume)
+	{
+		masterMixer.SetFloat("SFXVolume", volume);
+		float _volume = Mathf.InverseLerp(-80, 0, volume);
+		float result = Mathf.Lerp(0, 100, _volume);
+
+		sfxVolText.text = result.ToString("0");
 	}
 
 	public void SetQuality(int qIndex)

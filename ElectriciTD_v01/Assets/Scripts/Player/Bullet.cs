@@ -6,17 +6,29 @@ public class Bullet : MonoBehaviour
 
 	private Transform target;
 	public BulletBlueprints currentBullet;
+	public Turret turret;
+
+	public int bulletDamage;
+	public float bulletSpeed;
 
 	#endregion
 
 	#region Unity Methods
 	void Start()
     {
+		bulletDamage = currentBullet.bulletDamage;
+		bulletSpeed = currentBullet.bulletSpeed;
 
+		turret = FindObjectOfType<Turret>();
 	}
 
     void Update()
     {
+		if (bulletDamage != turret.ad)
+		{
+			bulletDamage = turret.ad;
+		}
+
 
 		if (target == null)
 		{
@@ -26,7 +38,7 @@ public class Bullet : MonoBehaviour
 
 		//track bullet distance and make it face target while travelling
 		Vector3 dir = target.position - transform.position;
-		float distanceThisFrame = currentBullet.bulletSpeed * Time.deltaTime;
+		float distanceThisFrame = bulletSpeed * Time.deltaTime;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
 		Vector3 rotation = Quaternion.Lerp(transform.rotation, lookRotation, Time.deltaTime * 25f).eulerAngles;
 		transform.rotation = Quaternion.Euler(90f, rotation.y, 90f);
@@ -64,7 +76,7 @@ public class Bullet : MonoBehaviour
 	{
 		Enemy e = enemy.GetComponent<Enemy>();
 
-		e.TakeDamage(currentBullet.bulletDamage);
+		e.TakeDamage(bulletDamage);
 
 	}
 

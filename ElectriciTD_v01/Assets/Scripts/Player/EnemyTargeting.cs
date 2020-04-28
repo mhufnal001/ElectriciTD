@@ -5,7 +5,7 @@ public class EnemyTargeting : MonoBehaviour
 	#region Variables
 
 	public GameObject bulletPrefab;
-	public TurretBlueprints currentTurret;
+	public Turret currentTurret;
 
 	public Transform target;
 	public Transform pivotPoint;
@@ -19,7 +19,7 @@ public class EnemyTargeting : MonoBehaviour
     #region Unity Methods
     void Start()
     {
-		currentTurret = gameObject.GetComponent<Turret>().currentBlueprint;
+		currentTurret = gameObject.GetComponent<Turret>();
 
 		InvokeRepeating("UpdateTarget", 0f, 0.5f);
     }
@@ -30,7 +30,6 @@ public class EnemyTargeting : MonoBehaviour
 		{
 			return;
 		}
-
 		//find target direction, convert to euler in order to only manipulate y-axis, use Lerp to smooth turret look speed
 		Vector3 dir = target.position - transform.position;
 		Quaternion lookRotation = Quaternion.LookRotation(dir);
@@ -52,7 +51,6 @@ public class EnemyTargeting : MonoBehaviour
 	{
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere(transform.position, currentTurret.range);
-
 	}
 	#endregion
 

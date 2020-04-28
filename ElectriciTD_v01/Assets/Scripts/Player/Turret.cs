@@ -11,7 +11,7 @@ public class Turret : MonoBehaviour
 	public float fireRate;
 	public float turnSpeed;
 
-	public float ad;
+	public int ad;
 	public int hp;
 	public int energyCost;
 	public int sellPrice;

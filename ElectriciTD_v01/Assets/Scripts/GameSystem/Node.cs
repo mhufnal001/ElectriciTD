@@ -25,7 +25,7 @@ public class Node : MonoBehaviour
 
 	[Header("Upgrade Modifers")]
 	public int upgradeLevel;
-	public float upgradeAD = 1.15f;
+	public int upgradeAD = 15;
 	public float upgradeRange = 1.25f;
 	public int upgradeSP = 2;
 	public int upgradeHP = 100;
@@ -184,7 +184,7 @@ public class Node : MonoBehaviour
 		Turret currTurret = turret.GetComponent<Turret>();
 		isUpgraded = true;
 
-		currTurret.ad *= upgradeAD;
+		currTurret.ad += upgradeAD;
 		currTurret.ad = Mathf.RoundToInt(currTurret.ad);
 		currTurret.range += upgradeRange;
 		currTurret.range = Mathf.RoundToInt(currTurret.range);
